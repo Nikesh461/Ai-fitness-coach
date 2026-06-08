@@ -7,7 +7,6 @@ const registeruser = async (req, res) => {
     try {
         const { name, email, password, age, height, weight, goal, preference, gender, dietPreference, cuisinePreference } = req.body;
 
-        // 1. Manual check for existing email (since unique:true throws a different error type)
         const isemailexists = await usermodel.findOne({ email });
         if (isemailexists) {
             return res.status(409).json({
@@ -18,7 +17,6 @@ const registeruser = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // 2. Create the user - this triggers the Schema validation
         const user = await usermodel.create({
             name,
             email,
@@ -33,7 +31,6 @@ const registeruser = async (req, res) => {
             cuisinePreference
         });
 
-        // JWT and Cookie logic...
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
         res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 86400000 });
 

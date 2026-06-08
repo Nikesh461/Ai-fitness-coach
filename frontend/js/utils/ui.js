@@ -74,10 +74,29 @@ window.FitAIUI = (() => {
         return Number.isNaN(date.getTime()) ? '—' : date.toLocaleDateString();
     }
 
+    /**
+     * Debounce utility function
+     * @param {Function} func - Function to execute
+     * @param {number} wait - Delay in ms
+     * @returns {Function} - Debounced function
+     */
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     return {
         showToast,
         setButtonLoading,
         renderState,
-        formatDate
+        formatDate,
+        debounce
     };
 })();

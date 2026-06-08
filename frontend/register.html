@@ -46,6 +46,32 @@
             background: radial-gradient(circle at top right, rgba(0, 102, 255, 0.15), transparent),
                         radial-gradient(circle at bottom left, rgba(0, 102, 255, 0.05), transparent);
         }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 4px;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .error-message.visible {
+            opacity: 1;
+            height: auto;
+            margin-bottom: 8px;
+        }
+
+        input.invalid, select.invalid {
+            border-color: #dc3545 !important;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -85,6 +111,7 @@
                                 class="w-full bg-slate-900/50 border border-slate-800 rounded-2xl py-3.5 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-600"
                             >
                         </div>
+                        <div id="name-error" class="error-message"></div>
                     </div>
 
                     <!-- Email Field -->
@@ -100,6 +127,7 @@
                                 class="w-full bg-slate-900/50 border border-slate-800 rounded-2xl py-3.5 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-600"
                             >
                         </div>
+                        <div id="email-error" class="error-message"></div>
                     </div>
 
                     <!-- Password Grid -->
@@ -117,6 +145,7 @@
                                     class="w-full bg-slate-900/50 border border-slate-800 rounded-2xl py-3.5 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-600"
                                 >
                             </div>
+                            <div id="password-error" class="error-message"></div>
                         </div>
 
                         <!-- Confirm Password Field -->
@@ -132,6 +161,7 @@
                                     class="w-full bg-slate-900/50 border border-slate-800 rounded-2xl py-3.5 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-600"
                                 >
                             </div>
+                            <div id="confirm-password-error" class="error-message"></div>
                         </div>
                     </div>
 
@@ -140,14 +170,17 @@
                         <div>
                             <label for="age" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Age</label>
                             <input type="number" id="age" required placeholder="24" class="w-full bg-slate-900/50 border border-slate-800 rounded-2xl py-3.5 px-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-600">
+                            <div id="age-error" class="error-message"></div>
                         </div>
                         <div>
                             <label for="height" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Height (cm)</label>
                             <input type="number" id="height" required placeholder="175" class="w-full bg-slate-900/50 border border-slate-800 rounded-2xl py-3.5 px-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-600">
+                            <div id="height-error" class="error-message"></div>
                         </div>
                         <div>
                             <label for="weight" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Weight (kg)</label>
                             <input type="number" id="weight" required placeholder="70" class="w-full bg-slate-900/50 border border-slate-800 rounded-2xl py-3.5 px-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-slate-600">
+                            <div id="weight-error" class="error-message"></div>
                         </div>
                     </div>
 
@@ -161,6 +194,7 @@
                                 <option value="Maintenance">Maintenance</option>
                                 <option value="Strength">Strength</option>
                             </select>
+                            <div id="goal-error" class="error-message"></div>
                         </div>
                         <div>
                             <label for="gender" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Gender</label>
@@ -170,6 +204,7 @@
                                 <option value="Female">Female</option>
                                 <option value="Other">Other</option>
                             </select>
+                            <div id="gender-error" class="error-message"></div>
                         </div>
                         <div>
                             <label for="preference" class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Workout Preference</label>
@@ -238,6 +273,7 @@
     <script src="js/config.js"></script>
     <script src="js/state/auth.js"></script>
     <script src="js/utils/ui.js"></script>
+    <script src="js/utils/registrationValidation.js"></script>
     <script src="js/services/api.js"></script>
     <script src="js/register.js"></script>
 </body>
